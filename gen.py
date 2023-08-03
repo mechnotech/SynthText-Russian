@@ -48,7 +48,7 @@ def add_res_to_db(imgname, res, db):
         db['data'][dname].attrs['txt'] = L
 
 
-def main(viz=False, debug=False, output_masks=False, data_path=None):
+def main(viz=False, debug=True, output_masks=False, data_path=None):
     """
     Entry point.
 
@@ -101,7 +101,7 @@ def main(viz=False, debug=False, output_masks=False, data_path=None):
 
             # re-size uniformly:
             sz = depth.shape[:2][::-1]
-            img = np.array(img.resize(sz, Image.ANTIALIAS))
+            img = np.array(img.resize(sz, Image.Resampling.LANCZOS))
             seg = np.array(Image.fromarray(seg).resize(sz, Image.NEAREST))
             print(colorize(Color.RED, '%d of %d' % (i, end_idx - 1), bold=True))
 

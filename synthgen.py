@@ -22,8 +22,8 @@ from common import *
 import traceback, itertools
 import imageio
 
-
 DEBUG = True
+
 
 class TextRegions(object):
     """
@@ -322,7 +322,7 @@ def viz_masks(fignum, rgb, seg, depth, label):
     # imageio.imwrite('reg.png', img)
 
     plt.close(fignum)
-    plt.figure(fignum,figsize=(15,15))
+    plt.figure(fignum, figsize=(15, 15))
     ims = [rgb, mim, depth, img]
     for i in range(len(ims)):
         plt.subplot(2, 2, i + 1)
@@ -412,7 +412,7 @@ class RendererV3(object):
                                       flags=cv2.WARP_INVERSE_MAP | cv2.INTER_LINEAR)
         return dst_mat
 
-    def  homographyBB(self, bbs, H, offset=None):
+    def homographyBB(self, bbs, H, offset=None):
         """
         Apply homography transform to bounding-boxes.
         BBS: 2 x 4 x n matrix  (2 coordinates, 4 points, n bbs).
@@ -577,9 +577,9 @@ class RendererV3(object):
             # are "aligned" appropriately with the character-bb.
             # (exhaustive search over all possible assignments):
             cc_tblr = np.c_[cc[0, :],
-                            cc[-3, :],
-                            cc[-2, :],
-                            cc[3, :]].T
+            cc[-3, :],
+            cc[-2, :],
+            cc[3, :]].T
             perm4 = np.array(list(itertools.permutations(np.arange(4))))
             dists = []
             for pidx in range(perm4.shape[0]):
@@ -682,15 +682,15 @@ class RendererV3(object):
                                                          regions['homography'][ireg],
                                                          regions['homography_inv'][ireg])
                     else:
-                        with time_limit(self.max_time):
-                            txt_render_res = self.place_text(img, place_masks[ireg],
-                                                             regions['homography'][ireg],
-                                                             regions['homography_inv'][ireg])
+                        # with time_limit(self.max_time):
+                        txt_render_res = self.place_text(img, place_masks[ireg],
+                                                         regions['homography'][ireg],
+                                                         regions['homography_inv'][ireg])
                 except TimeoutException as msg:
                     print(msg)
                     continue
                 except:
-                    # traceback.print_exc()
+                    traceback.print_exc()
                     # some error in placing text on the region
                     continue
 

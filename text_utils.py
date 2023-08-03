@@ -285,8 +285,8 @@ class RenderFont(object):
         locs = [None for i in range(len(text_arrs))]
         out_arr = np.zeros_like(back_arr)
         for i in order:            
-            ba = np.clip(back_arr.copy().astype(np.float), 0, 255)
-            ta = np.clip(text_arrs[i].copy().astype(np.float), 0, 255)
+            ba = np.clip(back_arr.copy().astype(np.float32), 0, 255)
+            ta = np.clip(text_arrs[i].copy().astype(np.float32), 0, 255)
             ba[ba > 127] = 1e8
             intersect = ssig.fftconvolve(ba,ta[::-1,::-1],mode='valid')
             safemask = intersect < 1e8
@@ -361,7 +361,7 @@ class RenderFont(object):
         max_font_h = min(0.9*H, (1/f_asp)*W/(self.min_nchar+1))
         max_font_h = min(max_font_h, self.max_font_h)
         if max_font_h < self.min_font_h: # not possible to place any text here
-            return #None
+            return
 
         # let's just place one text-instance for now
         ## TODO : change this to allow multiple text instances?
@@ -410,7 +410,7 @@ class RenderFont(object):
             text_mask, loc, bb, _ = self.place_text([txt_arr], mask, [bb])
             if len(loc) > 0:#successful in placing the text collision-free:
                 return text_mask,loc[0],bb[0],text
-        return #None
+        return
 
 
     def visualize_bb(self, text_arr, bbs):
