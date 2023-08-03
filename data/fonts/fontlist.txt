@@ -1,9 +1,4 @@
-vn/times.ttf
-vn/arial.ttf
-vn/arialbd.ttf
-vn/arialbi.ttf
-vn/ariali.ttf
-vn/times.ttf
-vn/timesbd.ttf
-vn/timesbi.ttf
-vn/timesi.ttf
+ru/couriercyrps_bold.ttf
+ru/PolyglOTT.ttf
+ru/trixiecyr_light.otf
+ru/trixiecyr_plain.ttf
